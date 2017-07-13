@@ -6,6 +6,11 @@ Danhngon = {
     getRequest: 'GET',
 
     /**
+     * Request type : POST
+     */
+    postRequest: 'POST',
+
+    /**
      * Empty String
      */
     EMPTY_STRING: '',
@@ -17,6 +22,9 @@ Danhngon = {
 
     /**
      * Request a random danhngon
+     * @param language {String} language in ISO code ('en', 'fr' etc.)
+     * @param callback {Function} to callback on completion
+     * @param errback {Function} to callback on error
      */
     getRandomDanhngon: function() {
         var result;
@@ -33,7 +41,11 @@ Danhngon = {
     },
 
     /**
-     * Request a random danhngon
+     * Request a danhngon with id
+     * @param id {String}
+     * @param language {String} language in ISO code ('en', 'fr' etc.)
+     * @param callback {Function} to callback on completion
+     * @param errback {Function} to callback on error
      */
     getDanhngon: function() {
         var that = this;
@@ -49,9 +61,28 @@ Danhngon = {
             return;
         }
 
-        var requestURL = this.baseURL + '/' + id + '/' + language;
+        var requestURL = this.baseURL;
 
-        this.xdr(requestURL, this.getRequest, '', callback, callbackErr);
+        this.xdr(requestURL, this.po, '', callback, callbackErr);
+    },
+
+    /**
+     * Create a danhngon (for admins with authenticated tokens only)
+     * @param token {String} the provided token to access api
+     * @param content {String} the content of the danhngon
+     * @param author {String} the author of the danhngon
+     * @param language {String} the language of danhngon in ISO code ('en', 'fr' etc.)
+     * @param callback {Function} to callback on completion
+     * @param errback {Function} to callback on error
+     */
+    createDanhngon: function(token, content, author, language, callback, callbackErr) {
+        var requestURL = this.baseURL;
+
+        var data =  "content=" + content +
+                    "&author=" + author +
+                    "&language=" + language;
+
+        this.xdr(requestURL, this.postRequest, data, callback, callbackErr, token);
     },
 
     /**
@@ -81,6 +112,10 @@ Danhngon = {
                     }
                 };
                 req.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+                if (method === this.postRequest) {
+                    req.setRequestHeader("x-access-token", arguments[5]);
+                    req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                }
                 req.send(data);
             }
         } else if(XDomainRequest) {

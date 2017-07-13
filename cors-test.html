@@ -4,7 +4,23 @@
 		<script src="danhngon.js"></script>
 		<script>
 		    $(document).ready(function() {
-		    	var danhngon = Danhngon.getRandomDanhngon(
+				var danhngon = Danhngon.getRandomDanhngon(
+				function(danhngon) {
+					alert("id: " + danhngon._id + "\n"
+						+ "content: " + danhngon.content + "\n"
+						+ "author: " + danhngon.author + "\n"
+						+ "language: " + danhngon.language + "\n"
+						+ "createdAt: " + new Date(danhngon.createdAt));
+				},
+				function (err) {
+					alert("error: " + err);
+				});
+
+		    	danhngon = Danhngon.createDanhngon(
+					"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyIkX18iOnsic3RyaWN0TW9kZSI6dHJ1ZSwic2VsZWN0ZWQiOnt9LCJnZXR0ZXJzIjp7fSwid2FzUG9wdWxhdGVkIjpmYWxzZSwiYWN0aXZlUGF0aHMiOnsicGF0aHMiOnsiY3JlYXRlZEF0IjoiaW5pdCIsImFkbWluIjoiaW5pdCIsInBhc3N3b3JkIjoiaW5pdCIsInVzZXJuYW1lIjoiaW5pdCIsIl9pZCI6ImluaXQifSwic3RhdGVzIjp7Imlnbm9yZSI6e30sImRlZmF1bHQiOnt9LCJpbml0Ijp7ImNyZWF0ZWRBdCI6dHJ1ZSwiYWRtaW4iOnRydWUsInBhc3N3b3JkIjp0cnVlLCJ1c2VybmFtZSI6dHJ1ZSwiX2lkIjp0cnVlfSwibW9kaWZ5Ijp7fSwicmVxdWlyZSI6e319LCJzdGF0ZU5hbWVzIjpbInJlcXVpcmUiLCJtb2RpZnkiLCJpbml0IiwiZGVmYXVsdCIsImlnbm9yZSJdfSwiZW1pdHRlciI6eyJkb21haW4iOm51bGwsIl9ldmVudHMiOnt9LCJfZXZlbnRzQ291bnQiOjAsIl9tYXhMaXN0ZW5lcnMiOjB9fSwiaXNOZXciOmZhbHNlLCJfZG9jIjp7ImNyZWF0ZWRBdCI6IjIwMTctMDctMTNUMTU6NDM6NTMuOTQ2WiIsImFkbWluIjp0cnVlLCJwYXNzd29yZCI6IiQyYSQxMCQ2RFNEeHFkTElvTHNadC82c1ZCakNPNmczZmNvM0ZNeDBLRUFIQ0QvU29KYjdScjN4SGhaSyIsInVzZXJuYW1lIjoiU29uIE5ndXllbiIsIl9pZCI6IjU5Njc5NTM5OTkwZWIzMjJjODk1Y2Q0MSJ9LCIkaW5pdCI6dHJ1ZSwiaWF0IjoxNDk5OTYwNjQ1LCJleHAiOjE0OTk5NjIwODV9._bPYBOoC1eQi_6ckdmbRJmbbapJcrsVHSRUeFLKlq_4",
+					"hello",
+					"hello-author",
+					"te",
 				function(danhngon) {
 					alert("id: " + danhngon._id + "\n"
 						+ "content: " + danhngon.content + "\n"
